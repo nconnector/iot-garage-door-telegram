@@ -26,16 +26,13 @@ def to_esp8266(message, chat_id):
     s = socket.socket()
     s.connect((ESP8266_IP, 80))
     s.sendall(message.encode())  # to bytes with utf-8
-    buffer = []
     while True:
         response = s.recv(1024).decode("utf-8")
         if response:
             bot.sendMessage(chat_id, response, reply_markup=keyboard)  # send messages as they appear
-            buffer.append(response)  # full response log
         else:
             break
     s.close()
-    return buffer
 
 
 def handle(msg):
@@ -46,7 +43,7 @@ def handle(msg):
 
         elif msg['text'] == "I'm home" or msg['text'] == "Click":
             if chat_id in TRUSTED_USERS:
-                try:  # todo: make this listen to 925telegram
+                try:
                     cmd = msg['text']
 
                     to_esp8266(cmd, chat_id)
