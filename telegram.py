@@ -4,7 +4,8 @@ import telepot
 from telepot.loop import MessageLoop
 from telepot.namedtuple import ReplyKeyboardMarkup
 from pprint import pprint
-from time import sleep
+from time import sleep, strftime
+from datetime import datetime
 import ctypes
 
 
@@ -29,6 +30,8 @@ def to_esp8266(message, chat_id):
     while True:
         response = s.recv(1024).decode("utf-8")
         if response:
+            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
+            print(f'{timestamp}  #  {chat_id}  #  {response}')
             bot.sendMessage(chat_id, response, reply_markup=keyboard)  # send messages as they appear
         else:
             break
@@ -57,6 +60,8 @@ def handle(msg):
         elif msg['text'] == "Register":
             # apply for registration
             if chat_id not in TRUSTED_USERS:
+                timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
+                print(f'{timestamp}  #  {chat_id}  #  Requested access.')
                 bot.sendMessage(ADMIN, f'{chat_id} has requested access')
                 bot.sendMessage(chat_id, f'Attempting registration. Your id: {chat_id}.', reply_markup=keyboard)
             else:
