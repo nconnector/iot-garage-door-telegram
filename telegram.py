@@ -88,6 +88,14 @@ keyboard = ReplyKeyboardMarkup(keyboard=[["I'm home", "Click"], ["Register", "Kn
 bot = telepot.Bot(API_TOKEN)
 info = bot.getMe()
 
-MessageLoop(bot, handle).run_as_thread()  # handle incoming messages
-print('Garage Door bot is now active....')
-input()
+def main():
+    try:
+        MessageLoop(bot, handle).run_as_thread()  # handle incoming messages
+        print('Garage Door bot is now active....')
+    except Error as e:
+        print(e)
+        main()
+        
+if __name__ == "__main__":
+    main()
+    input()

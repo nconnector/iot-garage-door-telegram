@@ -11,11 +11,11 @@
 
 ### How does it work?
 
-> The ESP8266 Microcontroller is connected to the Garage Door through the relay
+- The ESP8266 Microcontroller is connected to the Garage Door through the relay
  
-> The ESP8266 communicates with the Hub through a socket on the local network
+- The ESP8266 communicates with the Hub through a socket on the local network
 
-> The Hub then hosts a Telegram Bot to which authorized users may connect from their Telegram accounts
+- The Hub then hosts a Telegram Bot to which authorized users may connect from their Telegram accounts
 
 ## Prerequisites
 
